@@ -1,0 +1,40 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Histop</title>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+<div id="chart_div"></div>
+<script>
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(drawHistogram);
+      function drawHistogram() {
+        function drawChart(data) {
+          // Convertir les données récupérées en un tableau utilisable par Google Charts
+          var dataArray = [['Date', 'Température']];
+          data.results.forEach(entry => {
+            var date = new Date(entry.Jour * 1000);
+            dataArray.push([date.toLocaleDateString(), entry.temp]);
+          });
+          var dataTable = google.visualization.arrayToDataTable(dataArray);
+          // Configurer les options de l'histogramme
+          var options = {
+            title: 'Histogramme v2',
+            legend: { position: 'none' },
+            histogram: { bucketSize: 1, minValue: 0, maxValue: 40 }
+          };
+          // Créer un histogramme et le dessiner dans le div avec l'ID 'chart_div'
+          var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+          chart.draw(dataTable, options);
+        }
+        // Récupération de données depuis notre API /meteo2/
+        fetch('/meteo2/')
+          .then(response => response.json())
+          .then(data => {
+            drawChart(data);
+          });
+      }
+</script>
+</body>
+</html>
