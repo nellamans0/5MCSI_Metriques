@@ -28,8 +28,8 @@
           var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
           chart.draw(dataTable, options);
         }
-        // Récupération de données depuis notre API /paris/
-        fetch('/paris/')
+        // Récupération de données depuis notre API /meteobis/
+        fetch('/meteobis/')
           .then(response => response.json())
           .then(data => {
             drawChart(data);
