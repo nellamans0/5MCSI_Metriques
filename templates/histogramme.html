@@ -20,7 +20,7 @@
           var dataTable = google.visualization.arrayToDataTable(dataArray);
           // Configurer les options de l'histogramme
           var options = {
-            title: 'Histogramme v2',
+            title: 'Histogramme',
             legend: { position: 'none' },
             histogram: { bucketSize: 1, minValue: 0, maxValue: 40 }
           };
@@ -28,8 +28,8 @@
           var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
           chart.draw(dataTable, options);
         }
-        // Récupération de données depuis notre API /meteo2/
-        fetch('/meteo2/')
+        // Récupération de données depuis notre API /meteo/
+        fetch('/meteo/')
           .then(response => response.json())
           .then(data => {
             drawChart(data);
