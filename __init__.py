@@ -19,6 +19,10 @@ def hello_world():
 def mongraphique():
     return render_template("graphique.html")
 
+@app.route("/histogramme/")
+def monhistogramme():
+    return render_template("histogramme.html")
+
 @app.route('/meteo/')
 def meteo():
     response = urlopen('https://samples.openweathermap.org/data/2.5/forecast?lat=0&lon=0&appid=xxx')
